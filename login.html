@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<style>
+body {font-family:Arial; background:#0f172a; color:white; text-align:center; padding:20px;}
+input {padding:10px; margin:10px; border-radius:6px; border:none; width:250px;}
+button {padding:10px 20px; border-radius:6px; border:none; background:#22c55e; color:white; cursor:pointer;}
+button:hover {background:#16a34a;}
+.flash {color:#f87171; margin-top:10px;}
+a {color:#22c55e; text-decoration:none;}
+a:hover {text-decoration:underline;}
+</style>
+</head>
+<body>
+<h1>Login</h1>
+<form method="POST">
+<input type="text" name="username" placeholder="Username" required><br>
+<input type="password" name="password" placeholder="Password" required><br>
+<button type="submit">Login</button>
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+</body>
+</html>

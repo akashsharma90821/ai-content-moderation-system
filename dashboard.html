@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Moderation Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+table{
+margin:auto;
+margin-top:40px;
+border-collapse:collapse;
+width:70%;
+}
+
+th,td{
+padding:12px;
+border:1px solid white;
+}
+
+.toxic{
+background:#dc2626;
+}
+
+.safe{
+background:#16a34a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>AI Moderation Dashboard</h1>
+
+<table>
+
+<tr>
+<th>Comment</th>
+<th>Result</th>
+</tr>
+
+{% for c in comments %}
+
+<tr class="{% if 'Toxic' in c.result %}toxic{% else %}safe{% endif %}">
+<td>{{ c.text }}</td>
+<td>{{ c.result }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>

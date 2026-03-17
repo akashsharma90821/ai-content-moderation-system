@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<style>
+body {font-family:Arial; background:#0f172a; color:white; text-align:center; padding:20px;}
+input {padding:10px; margin:10px; border-radius:6px; border:none; width:250px;}
+button {padding:10px 20px; border-radius:6px; border:none; background:#22c55e; color:white; cursor:pointer;}
+button:hover {background:#16a34a;}
+.flash {color:#f87171; margin-top:10px;}
+a {color:#22c55e; text-decoration:none;}
+a:hover {text-decoration:underline;}
+</style>
+</head>
+<body>
+<h1>Register</h1>
+<form method="POST">
+<input type="email" name="email" placeholder="Enter your email" required><br>
+<input type="text" name="username" placeholder="Choose a username" required><br>
+<input type="password" name="password" placeholder="Enter password" required><br>
+<input type="password" name="confirm_password" placeholder="Confirm password" required><br>
+<input type="text" name="otp" placeholder="Enter OTP (demo: 123456)"><br>
+<button type="submit">Register</button>
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+</body>
+</html>

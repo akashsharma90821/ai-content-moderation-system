@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Moderation System</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #0b1a2f;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 30px;
+        }
+
+        .box {
+            margin: 20px auto;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #22c55e;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #16a34a;
+        }
+
+        .logout {
+            background-color: #ef4444;
+        }
+
+        table {
+            margin: 30px auto;
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid white;
+        }
+
+        th {
+            background-color: #1f2937;
+        }
+
+        .safe {
+            background-color: #16a34a;
+        }
+
+        .toxic {
+            background-color: #dc2626;
+        }
+
+        a {
+            color: #facc15;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AI Moderation System</h1>
+
+    <p>Logged in as: <b>{{ user.username }}</b></p>
+
+    <a href="{{ url_for('logout') }}">
+        <button class="logout">Logout</button>
+    </a>
+
+    <div class="box">
+        <form method="POST">
+            <input type="text" name="comment" placeholder="Enter comment" required>
+            <button type="submit">Check Comment</button>
+        </form>
+    </div>
+
+    {% if result %}
+        <h2>Result: {{ result }}</h2>
+    {% endif %}
+
+    <h2>Live Moderation Dashboard</h2>
+
+    <table>
+        <tr>
+            <th>Comment</th>
+            <th>Result</th>
+            <th>Action</th>
+        </tr>
+
+        {% for comment in comments %}
+        <tr class="{% if 'Toxic' in comment.result %}toxic{% else %}safe{% endif %}">
+            <td>{{ comment.text }}</td>
+            <td>{{ comment.result }}</td>
+            <td>
+                <a href="{{ url_for('delete_comment', id=comment.id) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
